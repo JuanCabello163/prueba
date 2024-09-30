@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f06d06;
+}
+#ruc-container {
+    width: 50%;
+    margin: 40px auto;
+    text-align: center;
+}
+#ruc-input {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#ruc-button {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#ruc-button:hover {
+    background-color: #3e8e41;
+}
+#ruc-result {
+    margin-top: 20px;
+    font-size: 18px;
+}

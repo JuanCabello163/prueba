@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buscar RUC</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f06d06;
+        }
+        #ruc-container {
+            width: 50%;
+            margin: 40px auto;
+            text-align: center;
+        }
+        #ruc-input {
+            width: 100%;
+            height: 40px;
+            font-size: 18px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #ruc-button {
+            width: 100%;
+            height: 40px;
+            font-size: 18px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #ruc-button:hover {
+            background-color: #3e8e41;
+        }
+        #ruc-result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="ruc-container">
+        <h2>Ingrese RUC</h2>
+        <input id="ruc-input" type="text" placeholder="Ingrese el número de RUC">
+        <button id="ruc-button">Buscar</button>
+        <div id="ruc-result"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script>
+        const rucInput = document.getElementById('ruc-input');
+        const rucButton = document.getElementById('ruc-button');
+        const rucResult = document.getElementById('ruc-result');
+        const url = 'mistyrose-jerbo-doqy22ngnqtbmz6l.builder-preview.com';
+        const id = '00e5589d-0363-4369-92a2-fadf6b882b0d';
+        const clave = '622cauHsmeoIS0hGJVMk7g==';
+
+        rucButton.addEventListener('click', () => {
+            const ruc = rucInput.value.trim();
+            if (ruc !== '') {               
+                axios.post(`${url}`, {
+                    'ruc': ruc,
+                    'api_key': id,
+                    'api_secret': clave
+                })  
+                .then(response => {
+                    if (response.data.length > 0) {
+                        const partner = response.data[0];
+                        rucResult.innerHTML = `Resultado de la búsqueda: ${partner.name} - ${partner.street}`;
+                    } else {
+                        rucResult.innerHTML = 'No se encontró ningún resultado';
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    rucResult.innerHTML = 'Error al buscar el RUC';
+                });
+            } else {
+                rucResult.innerHTML = 'Por favor, ingrese un número de RUC válido';
+            }
+        });
+    </script>
+</body>
+</html>
